@@ -133,6 +133,22 @@ p {
 
 .site-nav .link.current {
   color: var(--accent-color);
+  content: '';
+  display: block;
+  position: relative;
+}
+
+.site-nav .link.current::after {
+  position: absolute;
+  display: flex;
+  content: '';
+  bottom: -3px;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  border: 2px solid var(--accent-color);
+  border-radius: 2px;
+  background-color: var(--accent-color);
 }
 
 /* Contacts list */
@@ -273,13 +289,13 @@ p {
 
 .work-list {
   display: flex;
-
-  position: relative;
 }
 
 .work-list .item {
   width: 370px;
   margin-right: 30px;
+
+  position: relative;
 }
 
 .work-list .item:nth-child(3n) {
@@ -292,6 +308,11 @@ p {
 
 .work-list .description {
   position: absolute;
+  display: inline-block;
+  bottom: 0;
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
 
   font-weight: 700;
   font-size: 14px;
@@ -301,6 +322,7 @@ p {
   text-transform: uppercase;
 
   color: var(--primary-background-color);
+  background-color: rgba(47, 48, 58, 0.8);
 }
 
 /* Team */
@@ -636,7 +658,7 @@ p {
   color: var(--primary-text-color);
 }
 
-.projects-list .item-thumb {
+.projects-list .overlay {
   position: absolute;
   top: 20%;
   left: 50%;
@@ -654,7 +676,7 @@ p {
   color: #ffffff;
 }
 
-.projects-list .link:hover .item-thumb {
+.projects-list .link:hover .overlay {
   opacity: 1;
 }
 
@@ -672,4 +694,52 @@ p {
   text-align: center;
   letter-spacing: 0.06em;
   cursor: pointer;
+}
+
+/* Modal window */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  width: 528px;
+  height: 581px;
+  background-color: var(--primary-background-color);
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+  margin-right: 8px;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+}
+
+.close-modal {
+  width: 18px;
+  height: 18px;
+  fill: var(--logo-header-color);
 }
