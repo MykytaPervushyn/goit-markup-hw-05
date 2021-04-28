@@ -45,6 +45,8 @@ p {
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-list .link:hover,
@@ -407,6 +409,9 @@ p {
   align-items: center;
   color: var(--icons-color);
   background-color: var(--primary-background-color);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .background-icon:hover,
@@ -440,6 +445,9 @@ p {
   height: 92px;
   border: 1px solid var(--icons-color);
   border-radius: 4px;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .client-icon {
@@ -538,6 +546,8 @@ p {
   height: 44px;
   justify-content: center;
   align-items: center;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link-icon {
@@ -575,6 +585,10 @@ p {
   border: transparent;
   border-radius: 4px;
   cursor: pointer;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filters-list .filter:hover,
@@ -597,18 +611,26 @@ p {
 }
 
 .projects-list .link::before {
-  display: inline-block;
+  /* display: inline-block;
   position: absolute;
   content: '';
   width: 370px;
   height: 294px;
   background-color: rgba(33, 150, 243, 0.9);
   opacity: 0;
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  transform: translateY(100%); */
 }
 
-.projects-list .link:hover::before {
-  opacity: 0.9;
-}
+/* /* .projects-list .link:hover::before,
+.projects-list .link:focus::before {
+  opacity: 0.9; */
+
+/* transform: translateY(0);
+} */
 
 .projects-list .item:nth-child(3n) {
   margin-right: 0;
@@ -622,13 +644,65 @@ p {
   text-decoration: none;
   display: block;
 
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* 
+  position: relative; */
+}
+
+.projects-list .project:hover::before,
+.projects-list .project:focus::before {
+  opacity: 0.9;
+}
+
+.projects-list .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* width: 100%;
+  height: 100%; */
+  background-color: var(--accent-color);
+  transform: translateY(100%);
+  display: flex;
+  opacity: 0;
+
+  justify-content: center;
+  align-items: center;
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projects-list .link:hover .overlay,
+.projects-list .link:focus .overlay {
+  opacity: 0.9;
+  transform: translateY(0);
+}
+
+.projects-list .overlay-content {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+
+  width: 322px;
+  height: 168px;
+
+  color: #ffffff;
+}
+
+.projects-list .project {
   position: relative;
+  overflow: hidden;
 }
 
 .projects-list .link:hover,
 .projects-list .link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  opacity: 0.9;
 }
 
 .projects-list .illustration {
@@ -658,28 +732,6 @@ p {
   color: var(--primary-text-color);
 }
 
-.projects-list .overlay {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -10%);
-  display: flex;
-  opacity: 0;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.56;
-  letter-spacing: 0.03em;
-
-  width: 322px;
-  height: 168px;
-
-  color: #ffffff;
-}
-
-.projects-list .link:hover .overlay {
-  opacity: 1;
-}
-
 /* Button */
 .button {
   padding: 10px 32px;
@@ -704,14 +756,24 @@ p {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backdrop.is-hidden {
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop.is-hidden .modal {
+  transform: scale(0.9) translate(-50%, -50%);
 }
 
 .modal {
+  max-height: 100vh;
+  overflow-y: auto;
   width: 528px;
   height: 581px;
   background-color: var(--primary-background-color);
@@ -722,7 +784,9 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .close {
